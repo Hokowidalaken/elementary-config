@@ -1,2 +1,3 @@
 # elementary-config
-bash -c "$(curl -fsSL https://raw.github.com/gist/5126919)"
+Open Terminal, copy and past the following command and hit [Enter]
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/Hokowidalaken/elementary-config/master/install.sh)"
