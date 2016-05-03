@@ -29,7 +29,7 @@ sudo apt-get install google-chrome-stable -y &&
 sudo sed -i 's/#HandleLidSwitch=suspend/HandleLidSwitch=ignore/g' /etc/systemd/logind.conf &&
 sudo mkdir -p ~/.config/autostart &&
 sudo chown ${USER:=$(/usr/bin/id -run)}:$USER ~/.config/autostart &&
-sudo printf "[Desktop Entry]\nType=Application\nExec=sh -c 'google-chrome-stable --disk-cache-dir=/dev/null -kiosk -incognito \"\" & sleep 10 && xdotool mousemove 0 9999 && ~/.refresh.sh & ~/.wificheck.sh'\nHidden=false\nNoDisplay=false\nX-GNOME-Autostart-enabled=true\nName[en_US]=Chrome\nName=Chrome\nComment[en_US]=\nComment=\n" > ~/.config/autostart/chrome.desktop &&
+sudo printf "[Desktop Entry]\nType=Application\nExec=sh -c 'google-chrome-stable --disk-cache-dir=/dev/null -kiosk -incognito placeholder & sleep 10 && xdotool mousemove 0 9999 && ~/.refresh.sh & ~/.wificheck.sh'\nHidden=false\nNoDisplay=false\nX-GNOME-Autostart-enabled=true\nName[en_US]=Chrome\nName=Chrome\nComment[en_US]=\nComment=\n" > ~/.config/autostart/chrome.desktop &&
 sudo chown ${USER:=$(/usr/bin/id -run)}:$USER ~/.config/autostart &&
 sudo printf "#!/bin/bash\nfor (( ; ; ))\ndo\nsleep 60 && xdotool key ctrl+F5\ndone\n" > ~/.refresh.sh &&
 sudo chown ${USER:=$(/usr/bin/id -run)}:$USER ~/.refresh.sh && 
@@ -54,12 +54,12 @@ select yn in "Yes" "No"; do
         No ) sleep 5 && sudo reboot;;
     esac
 done
-echo "Please enter an URL that you'd like to launch on startup, e.g. https://www.trustpilot.com. WIP: For now please remember to escape characters." &&
-read url && sed -i "0,/\"/{s,\",\"$url ,}" ~/.config/autostart/chrome.desktop && clear
+echo "Please enter an URL that you'd like to launch on startup, e.g. https://www.trustpilot.com." &&
+read url && sed -i "0,/placeholder/{s,placeholder,\"$url\" ,}" ~/.config/autostart/chrome.desktop && clear
 echo "Done! Would you like to add another URL (1 = Yes / 2 = No)?"
 select yn in "Yes" "No"; do
     case $yn in
-        Yes ) clear && echo "Please enter another URL to launch on startup" && read url && sed -i "0,/\"/{s,\",\"$url ,}" ~/.config/autostart/chrome.desktop && echo "Done! Would you like to add another URL (1 = Yes / 2 = No)?"; continue;;
+        Yes ) clear && echo "Please enter another URL to launch on startup" && read url && sed -i "0,/\"/{s,\", \"$url\" \",}" ~/.config/autostart/chrome.desktop && echo "Done! Would you like to add another URL (1 = Yes / 2 = No)?"; continue;;
         No ) clear;break;;
     esac
 done
