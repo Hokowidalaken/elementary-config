@@ -51,12 +51,12 @@ sudo printf "[Desktop Entry]\nType=Application\nExec=sh -c 'google-chrome-stable
 # Change ownership of autostart directory again so that the application itself has correct rights
 sudo chown ${USER:=$(/usr/bin/id -run)}:$USER ~/.config/autostart &&
 # Create refresh.sh script and change its ownership
-sudo printf "#!/bin/bash\nfor (( ; ; ))\ndo\nsleep 1800 && xdotool key ctrl+F5\ndone\n" > ~/.refresh.sh &&
+sudo printf "#!/bin/bash\nfor (( ; ; ))\ndo\nxdotool key ctrl+F5 && sleep 1800\ndone\n" > ~/.refresh.sh &&
 sudo chown ${USER:=$(/usr/bin/id -run)}:$USER ~/.refresh.sh && 
 # Make refresh.sh executable
 sudo chmod +x ~/.refresh.sh &&
 # Create wificheck.sh script and change its ownership; make it executable
-sudo printf "#!/bin/bash\nsleep 10 &&\nwhile true; do\n    LC_ALL=C nmcli -t -f TYPE,STATE dev | grep wireless:connected\n    if [ \$? -eq 1 ]; then\n        echo 'Device \$(hostname) on \${SSID} network disconnected \$(date -R)' >> ~/wifilog.txt &\n        nmcli nm wifi off && nmcli nm wifi on && sleep 5 && xdotool key CTRL+F5 &&\n        sleep 3\n    fi\n    SSID=\$(iwgetid -r)\n    sleep 5\ndone\n" > ~/.wificheck.sh && 
+sudo printf "#!/bin/bash\nsleep 10 &&\nwhile true; do\n    LC_ALL=C nmcli -t -f TYPE,STATE dev | grep wireless:connected\n    if [ \$? -eq 1 ]; then\n        echo \"Device \$(hostname) on \${SSID} network disconnected \$(date -R)\" >> ~/wifilog.txt &\n        nmcli nm wifi off && nmcli nm wifi on && sleep 5 && xdotool key CTRL+F5 &&\n        sleep 3\n    fi\n    SSID=\$(iwgetid -r)\n    sleep 5\ndone\n" > ~/.wificheck.sh && 
 sudo chown ${USER:=$(/usr/bin/id -run)}:$USER ~/.wificheck.sh && 
 sudo chmod +x ~/.wificheck.sh &&
 # Update software repositories
