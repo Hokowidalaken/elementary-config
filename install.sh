@@ -76,7 +76,7 @@ google-chrome &> /dev/null
 clear
 # Asking users if they want to continue configuring their setup
 echo "___________________8 of 8___________________" &&
-echo "Would you like to customize URLs and scripts? Selecting 'No' will reboot the machine (1 = Yes / 2 = No)."
+echo "Would you like to customize URLs and scripts? Please note that currently no URLs will be launched on startup. Selecting 'No' will reboot the machine (1 = Yes / 2 = No)."
 # Yes / No choice
 select yn in "Yes" "No"; do
     case $yn in
@@ -117,7 +117,7 @@ select yn in "Yes" "No"; do
             # Instruction, wait for input
             echo "Please type in the new URL..." && read newurl
             # Use input to replace URL
-            sed -i "s/$(grep -oP '\"\K.*?(?=\")' ~/.config/autostart/chrome.desktop | awk -v purl="$purl" '{print $purl}')/$newurl/g" ~/.config/autostart/chrome.desktop &&
+            sed -i "s,$(grep -oP '\"\K.*?(?=\")' ~/.config/autostart/chrome.desktop | awk -v purl="$purl" '{print $purl}'),$newurl,g" ~/.config/autostart/chrome.desktop &&
             clear &&
             # Change another URL? 
             echo "Done. Would you like to change another URL (1 = Yes / 2 = No)?"            
@@ -153,5 +153,3 @@ done
 read -p "`echo $'\n> '`All done! You can further configure the system (eg sleep time, displays, URLs) by using the config script located in the same folder as this one. Please unplug the USB drive before the system boots as it may default into booting from the USB drive. You can close the Terminal now, unplug the USB drive and restart manually. Alternatively press [ENTER] to restart in 5 seconds, but please wait until the system starts shutting down before unplugging the USB drive..." && sleep 5 && 
 # Restart machine
 sudo reboot
- 
-
