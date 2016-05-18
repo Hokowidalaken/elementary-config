@@ -4,6 +4,8 @@ Follow the guide here to install elementary OS on your machine:
 
 https://elementary.io/docs/installation
 
+When given the option, tick install third party software and login automatically.
+
 
 Once done, open Terminal, copy and paste the following command and confirm with [Enter]:
 
