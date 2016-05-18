@@ -12,4 +12,4 @@ Once done, open Terminal, copy and paste the following command and confirm with 
 
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Hokowidalaken/elementary-config/master/install.sh)"
 
-Follow the instructions from the Terminal window.
+Follow the instructions in the Terminal window.
