@@ -10,7 +10,7 @@ You need an internet connection to run the script.
 
 
 
-Once done, open Terminal, copy and paste the following command (whole line as below, icl. quotes) and confirm with [Enter]:
+Once done, open Terminal, copy and paste the following command (whole line as below, incl. quotes) and confirm with [Enter]:
 
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Hokowidalaken/elementary-config/master/install.sh)"
 
