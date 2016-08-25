@@ -1,34 +1,34 @@
 #!/bin/bash
 # Introduction to the script, telling users what will happen
-echo "___________________1 of 8___________________" &&
+echo "1 of 8" &&
 read -p "`echo $'\n> '`Hej there! This script will guide you through setting up your machine. We'll start by focusing on GUI things. Please note that the script won't continue unless you close the applications that will launch once you're done making changes there. Press [ENTER] to continue..." &&
 clear
 # Instruction for System Settings - Power menu, what to change where
-echo "___________________2 of 8___________________" &&
+echo "2 of 8" &&
 read -p "`echo $'\n> '`|System Settings - Power will launch. Please make the changes listed below| `echo $'\n\n> '` -> Buttons: DO NOTHING. `echo $'\n> '` -> Turn off screen...: NEVER. `echo $'\n> '` Plugged In -> Sleep: NEVER. `echo $'\n> '` On Battery -> Sleep: NEVER. `echo $'\n> '` On Battery -> When power is low: DO NOTHING. `echo $'\n\n>'` |Close System Settings when you are done. Press [ENTER] to continue...|" &&
 # Launch Power menu
 gnome-control-center power &> /dev/null
 clear
 # Instruction for System Settings - Notifications menu, what to change where
-echo "___________________3 of 8___________________" &&
+echo "3 of 8" &&
 read -p "`echo $'\n> '`|System Settings - Notifications will launch. Please make the changes listed below| `echo $'\n\n> '` -> DND (bottom left): Enable. `echo $'\n\n>'` |Close System Settings when you are done. Press [ENTER] to continue...|" &&
 # Launch Notification menu
 gnome-control-center notifications &> /dev/null
 clear
 # Instruction for System Settings - Security and Privacy menu, what to change where
-echo "___________________4 of 8___________________" &&
+echo "4 of 8" &&
 read -p "`echo $'\n> '`|System Settings - Security and Privacy will launch. Please make the changes listed below| `echo $'\n\n> '` Privacy -> Privacy Mode -> ENABLE. `echo $'\n> '` Locking -> Lock on sleep: DISABLE. `echo $'\n> '` Locking -> Lock after screen...: DISABLE. `echo $'\n\n>'` |Close System Settings when you are done. Press [ENTER] to continue...|" &&
 # Launch privacy menu
 gnome-control-center privacy &> /dev/null
 clear
 # Instruction for Software and Updates, what to change where
-echo "___________________5 of 8___________________" &&
+echo "5 of 8" &&
 read -p "`echo $'\n> '`|Software & Updates will launch. Please make the changes listed below| `echo $'\n\n> '` Updates -> Automatically check for updates: NEVER. `echo $'\n\n>'` |Close Software & Updates when you are done. Press [ENTER] to continue...|" &&
 # Launch Software and Updates 
 software-properties-gtk &> /dev/null
 clear
 # Telling users what will automatically happen next
-echo "___________________6 of 8___________________" &&
+echo "6 of 8" &&
 read -p "`echo $'\n> '`|Your work is mostly done. Here's what will happen now:| `echo $'\n\n> '` Google Chrome will be installed. `echo $'\n>'`  Xdotool will be installed. `echo $'\n> '` Disper will be installed. `echo $'\n> '` The lid handle switch will be disabled. `echo $'\n> '` Autostart files will be created. `echo $'\n> '` The refresh script will be created. `echo $'\n> '` We'll do a full system upgrade and remove unnecessary files. `echo $'\n\n> '`|All of this stuff will take a couple of minutes (up to 20 minutes depending on network speed). Go grab a coffee or something. There are two more step after this. Press [ENTER] to continue..." &&
 # Import public key for Chrome
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - &&
@@ -56,7 +56,7 @@ sudo chown ${USER:=$(/usr/bin/id -run)}:$USER ~/.refresh.sh &&
 # Make refresh.sh executable
 sudo chmod +x ~/.refresh.sh &&
 # Create wificheck.sh script and change its ownership; make it executable
-sudo printf "#!/bin/bash\nsleep 10 &&\nwhile true; do\n    ping -q -c5 8.8.8.8 > /dev/null\n    if [ \$? -eq 0 ]; then\n        sleep 5\nelse\n        echo \"Device \$(hostname) disconnected \$(date -R)\" >> ~/wifilog.txt &\n        nmcli nm wifi off && nmcli nm wifi on && sleep 5 && xdotool key CTRL+F5 &&\n        sleep 3\nfi\ndone\n" > ~/.wificheck.sh && 
+sudo printf "#!/bin/bash\nsleep 10 &&\nwhile true; do\n    ping -q -c5 8.8.8.8 > /dev/null\n    if [ \$? -eq 0 ]; then\n        sleep 5\n    else\n        echo \"Device \$(hostname) disconnected \$(date -R)\" >> ~/wifilog.txt &\n        nmcli nm wifi off && nmcli nm wifi on && sleep 5 && xdotool key CTRL+F5 &&\n        sleep 3\nfi\ndone\n" > ~/.wificheck.sh && 
 sudo chown ${USER:=$(/usr/bin/id -run)}:$USER ~/.wificheck.sh && 
 sudo chmod +x ~/.wificheck.sh &&
 # Update software repositories
@@ -69,13 +69,13 @@ sudo apt-get purge apport -y &&
 sudo apt-get autoremove -y &&
 clear
 # Informing users that Chrome will launch
-echo "___________________7 of 8___________________" &&
+echo "7 of 8" &&
 read -p "The updates are done, Chrome will now launch. Please make it the default browser. Press [ENTER] to continue..." &&
 # Launch Chrome
 google-chrome &> /dev/null
 clear
 # Asking users if they want to continue configuring their setup
-echo "___________________8 of 8___________________" &&
+echo "8 of 8" &&
 echo "Would you like to customize URLs and scripts? Please note that currently no URLs will be launched on startup. Selecting 'No' will reboot the machine (1 = Yes / 2 = No)."
 # Yes / No choice
 select yn in "Yes" "No"; do
