@@ -56,7 +56,7 @@ sudo chown ${USER:=$(/usr/bin/id -run)}:$USER ~/.refresh.sh &&
 # Make refresh.sh executable
 sudo chmod +x ~/.refresh.sh &&
 # Create wificheck.sh script and change its ownership; make it executable
-sudo printf "#!/bin/bash\nsleep 10 &&\nwhile true; do\n    ping 8.8.8.8\n    if [ \$? -eq 1 ]; then\n        echo \"Device \$(hostname) disconnected \$(date -R)\" >> ~/wifilog.txt &\n        nmcli nm wifi off && nmcli nm wifi on && sleep 5 && xdotool key CTRL+F5 &&\n        sleep 3\n    else\n    sleep 5\nfi\ndone\n" > ~/.wificheck.sh && 
+sudo printf "#!/bin/bash\nsleep 10 &&\nwhile true; do\n    ping 8.8.8.8 > /dev/null\n    if [ \$? -eq 1 ]; then\n        echo \"Device \$(hostname) disconnected \$(date -R)\" >> ~/wifilog.txt &\n        nmcli nm wifi off && nmcli nm wifi on && sleep 5 && xdotool key CTRL+F5 &&\n        sleep 3\n    else\n    sleep 5\nfi\ndone\n" > ~/.wificheck.sh && 
 sudo chown ${USER:=$(/usr/bin/id -run)}:$USER ~/.wificheck.sh && 
 sudo chmod +x ~/.wificheck.sh &&
 # Update software repositories
