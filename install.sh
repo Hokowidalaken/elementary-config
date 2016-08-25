@@ -56,7 +56,7 @@ sudo chown ${USER:=$(/usr/bin/id -run)}:$USER ~/.refresh.sh &&
 # Make refresh.sh executable
 sudo chmod +x ~/.refresh.sh &&
 # Create wificheck.sh script and change its ownership; make it executable
-sudo printf "#!/bin/bash\nsleep 10 &&\nwhile true; do\n    LC_ALL=C nmcli -t -f TYPE,STATE dev | grep wireless:connected\n    if [ \$? -eq 1 ]; then\n        echo \"Device \$(hostname) on \${SSID} network disconnected \$(date -R)\" >> ~/wifilog.txt &\n        nmcli nm wifi off && nmcli nm wifi on && sleep 5 && xdotool key CTRL+F5 &&\n        sleep 3\n    fi\n    SSID=\$(iwgetid -r)\n    sleep 5\ndone\n" > ~/.wificheck.sh && 
+sudo printf "#!/bin/bash\nsleep 10 &&\nwhile true; do\n    ping 8.8.8.8    if [ \$? -eq 1 ]; then\n        echo \"Device \$(hostname) disconnected \$(date -R)\" >> ~/wifilog.txt &\n        nmcli nm wifi off && nmcli nm wifi on && sleep 5 && xdotool key CTRL+F5 &&\n        sleep 3\n    else\n    sleep 5\nfi\ndone\n" > ~/.wificheck.sh && 
 sudo chown ${USER:=$(/usr/bin/id -run)}:$USER ~/.wificheck.sh && 
 sudo chmod +x ~/.wificheck.sh &&
 # Update software repositories
@@ -150,6 +150,6 @@ select yn in "Yes" "No"; do
     esac
 done
 # Information, cheers you're done!
-read -p "`echo $'\n> '`All done! You can further configure the system (eg sleep time, displays, URLs) by using the config script located in the same folder as this one. Please unplug the USB drive before the system boots as it may default into booting from the USB drive. You can close the Terminal now, unplug the USB drive and restart manually. Alternatively press [ENTER] to restart in 5 seconds, but please wait until the system starts shutting down before unplugging the USB drive..." && sleep 5 && 
+read -p "`echo $'\n> '`All done! Restart in 5 seconds" && sleep 5 && 
 # Restart machine
 sudo reboot
