@@ -1,4 +1,5 @@
 # elementary-config
+Configuring elementary OS for use as a dashboard screen. Intended for Helpdesk. Not used anymore.
 
 Follow the guide here to install elementary OS on your machine:
 
